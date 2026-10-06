@@ -1,0 +1,256 @@
+<title>Aspen October Feed</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#f3f1ec;--ink:#1f262e;--muted:#6b7366;--line:#e0ddd6;--card:#fff;--green:#5E9827;--deep:#1e4a34;--cream:#f4f1e8}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);padding-block:0}
+.hero{background:linear-gradient(160deg,#143524 0%,#1e4a34 55%,#1f262e 100%);padding:44px 20px 38px;color:#fff}
+.hero-in{max-width:760px;margin:0 auto}
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:3px;color:#9fd36a;text-transform:uppercase;margin-bottom:14px}
+.eyebrow svg{width:22px;height:22px}
+.hero h1{font-size:30px;font-weight:800;letter-spacing:-0.5px;line-height:1.12;margin-bottom:12px;text-wrap:balance}
+.hero .sub{font-size:14.5px;color:#cfd9c8;max-width:640px;line-height:1.55}
+.meta{display:flex;flex-wrap:wrap;gap:22px;margin-top:22px}
+.mp{display:flex;flex-direction:column}
+.mp .l{font-size:10px;font-weight:700;color:#8aa07e;letter-spacing:1.5px;text-transform:uppercase}
+.mp .v{font-size:14px;font-weight:700;margin-top:3px;color:#fff}
+.asks{max-width:560px;margin:26px auto 0;padding:0 10px}
+.asks .box{background:#fff;border:1px solid var(--line);border-left:4px solid var(--green);border-radius:10px;padding:16px 18px}
+.asks h2{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.asks ol{padding-left:20px;font-size:14px;line-height:1.55}
+.asks li+li{margin-top:6px}
+.feed{max-width:560px;margin:10px auto 0;padding:0 10px}
+.datechip{display:flex;align-items:center;gap:10px;margin:26px 2px 8px;flex-wrap:wrap}
+.dc-date{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#3f4a3a;background:#e6e3da;padding:4px 10px;border-radius:20px}
+.dc-kind{font-size:11.5px;color:var(--muted);font-weight:600}
+.status{font-size:11px;font-weight:700;color:#2f5d1f;background:#e3f0d6;padding:3px 9px;border-radius:20px;margin-left:auto}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.reshare-line{font-size:12px;color:#666;padding:10px 16px 0;font-weight:600}
+.head{display:flex;align-items:flex-start;gap:10px;padding:14px 16px 8px}
+.av{width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.av-aspen{display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--line)}
+.av-aspen svg{width:34px;height:34px}
+.who{display:flex;flex-direction:column;min-width:0;flex:1}
+.nm{font-size:14px;font-weight:700;line-height:1.25}
+.tg{font-size:12px;color:#666;line-height:1.3;margin-top:1px}
+.tm{font-size:12px;color:#888;margin-top:2px}
+.fol{color:#0a66c2;font-size:13.5px;font-weight:700;white-space:nowrap;padding-top:2px}
+.cap{font-size:14px;line-height:1.5;white-space:pre-wrap;padding:6px 16px 4px;overflow-wrap:break-word}
+.cap.clamp{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+.cap .tag{color:#0a66c2;font-weight:600}
+.more{display:inline-block;color:#666;font-size:13.5px;font-weight:600;cursor:pointer;margin:0 16px 8px;user-select:none}
+.more:hover{color:#0a66c2;text-decoration:underline}
+.media{background:#000;position:relative}
+.media img,.media video{width:100%;display:block;max-width:100%}
+.carousel .cfr{display:none}.carousel .cfr.on{display:block}
+.cnav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:none;background:rgba(255,255,255,.92);color:#1f262e;font-size:16px;cursor:pointer;box-shadow:0 1px 6px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;z-index:3}
+.cnav.prev{left:10px}.cnav.next{right:10px}.cnav:hover{background:#fff}.cnav:focus-visible{outline:3px solid #9fd36a}
+.ccount{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.7);color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:12px;z-index:3}
+.cdots{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:3}
+.dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.45);cursor:pointer}.dot.on{background:#fff}
+.acts{display:flex;justify-content:space-around;padding:8px;border-top:1px solid #eee}
+.act{font-size:13px;color:#555;font-weight:600;padding:8px 10px;border-radius:6px}
+.note{font-size:12px;color:var(--muted);padding:8px 16px 2px;line-height:1.45;border-top:1px dashed var(--line)}
+.art{border-top:1px dashed var(--line);padding:8px 16px}
+.art summary{font-size:13px;font-weight:700;color:#2f5d1f;cursor:pointer}
+.art pre{white-space:pre-wrap;font:13px/1.55 inherit;font-family:inherit;margin-top:10px;color:var(--ink)}
+.hold{padding:22px 16px 20px;background:repeating-linear-gradient(135deg,#f7f6f2 0 10px,#efede7 10px 20px)}
+.hold-k{display:inline-block;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#2f5d1f;background:#e3f0d6;padding:3px 9px;border-radius:20px;margin-bottom:8px}
+.hold p{font-size:14px;line-height:1.5;color:var(--ink)}
+/* house-template frames rendered in HTML */
+.hf{container-type:inline-size;aspect-ratio:4/5;max-width:100%;background:radial-gradient(120% 90% at 20% 0%,#2a6a48 0%,#1e4a34 45%,#163a28 100%);color:#fff;position:relative;display:flex;flex-direction:column;padding:6cqw 6cqw 5cqw;overflow:hidden}
+.hf::before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.28),transparent 45%);pointer-events:none}
+.hf::after{content:"";position:absolute;right:-6cqw;top:-4cqw;width:40cqw;height:40cqw;background:repeating-linear-gradient(135deg,transparent 0 9cqw,rgba(255,255,255,.08) 9cqw 13cqw);transform:skewX(-10deg);pointer-events:none}
+.hf-top{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1}
+.wm{display:flex;align-items:center;gap:1.6cqw;font-weight:600;font-size:5.4cqw;letter-spacing:.2px}
+.wm svg{width:6.2cqw;height:6.2cqw}
+.hf-n{font-size:12cqw;font-weight:800;color:rgba(159,211,106,.55);line-height:1}
+.hf-cover{position:relative;z-index:1;margin-top:auto;margin-bottom:auto}
+.hf-cover .hf-lab{display:inline-block;background:rgba(255,255,255,.14);padding:1.6cqw 3.4cqw;border-radius:40cqw;font-size:3cqw;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:4cqw}
+.hf-cover h3{font-size:9.4cqw;line-height:1.08;font-weight:800;letter-spacing:-.02em;text-wrap:balance;color:#f6f3ea}
+.hf-cover p{font-size:3.9cqw;line-height:1.45;color:#d7e2cf;max-width:80cqw}
+.rule{display:block;width:12cqw;height:.9cqw;background:#9fd36a;border-radius:1cqw;margin:4cqw 0 3.6cqw}
+.hf-card{position:relative;z-index:1;margin-top:auto;margin-bottom:auto;background:var(--cream);color:#1f262e;border-radius:4cqw;padding:7cqw 6.5cqw 8cqw}
+.hf-card .hf-lab{font-size:3cqw;font-weight:800;color:#5E9827;letter-spacing:.06em;margin-bottom:2cqw}
+.hf-card h3{font-size:7.4cqw;line-height:1.1;font-weight:800;color:#1e4a34;letter-spacing:-.02em;text-wrap:balance}
+.hf-card .rule{margin:3.4cqw 0 4cqw}
+.hf-card p{font-size:4.3cqw;line-height:1.45;color:#2b3328}
+.hf-card p+p{margin-top:3cqw}
+.hf-foot{position:relative;z-index:1;font-size:3cqw;font-weight:700;letter-spacing:.12em;color:rgba(255,255,255,.7);text-transform:uppercase}
+.hf.cover .hf-foot{color:rgba(255,255,255,.55)}
+.hf.quote .qmark{font-size:26cqw;line-height:.6;color:#9fd36a;font-family:Georgia,serif;margin-bottom:2cqw}
+.hf.quote h3{font-size:8.6cqw}
+.hf.static h3{font-size:8.6cqw}
+.hf.vo{background:linear-gradient(160deg,#1f262e 0%,#163a28 100%)}
+.vo-wrap{position:relative;z-index:1;margin:auto 0;display:flex;flex-direction:column;align-items:center;text-align:center}
+.vo-av{width:30cqw;height:30cqw;border-radius:50%;object-fit:cover;border:1cqw solid #9fd36a}
+.wave{display:flex;align-items:center;gap:1.1cqw;height:14cqw;margin:6cqw 0 5cqw}
+.wave i{display:block;width:1.3cqw;background:#9fd36a;border-radius:1cqw;opacity:.9}
+.vo-nm{font-size:5cqw;font-weight:800}.vo-tg{font-size:3.4cqw;color:#cfd9c8;margin-top:.8cqw}
+.footer{text-align:center;font-size:12px;color:#8a9182;padding:34px 16px 60px;line-height:1.6;max-width:560px;margin:0 auto}
+@media (max-width:620px){.hero h1{font-size:24px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<div class="hero"><div class="hero-in">
+  <div class="eyebrow"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg><span>Aspen &middot; LinkedIn</span></div>
+  <h1>October &mdash; the launch month, as it will run</h1>
+  <div class="sub">Every post below is shown the way it will appear in the feed: captions as they will post, the correct posting profile, and the new template where the creative exists. Dates follow the website go-live; the sequence is fixed. Scroll like you would scroll LinkedIn, tap &ldquo;see more&rdquo; for any caption, and use the arrows on the carousels.</div>
+  <div class="meta">
+    <div class="mp"><span class="l">Window</span><span class="v">Launch day + four weeks</span></div>
+    <div class="mp"><span class="l">Posts</span><span class="v">11 (+4 page reshares)</span></div>
+    <div class="mp"><span class="l">Mix</span><span class="v">4 carousel &middot; 4 static &middot; 1 long-form &middot; 1 reveal &middot; 1 voiceover</span></div>
+    <div class="mp"><span class="l">From your profile</span><span class="v">4, the page reshares each</span></div>
+  </div>
+</div></div>
+
+<div class="asks"><div class="box">
+  <h2>Three things from you</h2>
+  <ol>
+    <li><strong>The launch piece.</strong> It is written in your voice as a draft. Change any word; your words survive.</li>
+    <li><strong>Three bullets from ITC</strong> for the Week 3 article: what carriers were saying about claims. We shape, you edit.</li>
+    <li><strong>A yes on the rest.</strong> Everything else is the page&rsquo;s voice, on the template you chose.</li>
+  </ol>
+</div></div>
+
+<div class="feed">
+<div class="post-wrap" id="p1"><div class="datechip"><span class="dc-date">Launch day · Mon</span><span class="dc-kind">Logo reveal video · Mark's profile, page reshares</span><span class="status">Your words to edit</span></div><div class="card"><div class="reshare-line">&#8635; Aspen will reshare this from Mark Vetrovec</div><div class="head"><img class="av" src="assets/mark_avatar.jpg" alt="Mark Vetrovec"/><div class="who"><span class="nm">Mark Vetrovec</span><span class="tg">CEO, Aspen</span><span class="tm">Scheduled &middot; Launch day · Mon &#127760;</span></div><div class="fol">+ Follow</div></div><div class="cap clamp" id="cap-p1">Today Aspen launched a new website and a modernised mark. Same company. Same people. Same way of working.
+
+We have been handling property claims for carriers since 2008. For most of those years we were heads-down doing the work, and at some point the brand stopped reflecting the company. Not because what we do changed. Because the company grew into something the old look no longer said.
+
+What has not changed: the field does the work on the ground, and the desk owns the outcome. One dedicated liaison per carrier. The belief that a carrier deserves a complete file the first time. That is the same company it has always been.
+
+What to notice first: the site is built around what a carrier desk actually comes to find. Assign a claim, see what we handle, read what we think.
+
+The mark is new. The standard isn't.
+
+<span class="tag">aspenclaims.com</span>
+
+— Mark Vetrovec, CEO
+<span class="tag">#ClaimsWithAspen</span></div><span class="more" data-t="cap-p1">&hellip;see more</span><div class="media"><video controls preload="metadata" playsinline muted poster="assets/reveal-poster.jpg" src="assets/reveal.mp4"></video></div><div class="note">Reveal shown as the approved first cut. Refined cut comes to you before it posts.</div><div class="acts"><span class="act">&#128077; Like</span><span class="act">&#128172; Comment</span><span class="act">&#128257; Repost</span><span class="act">&#10148; Send</span></div></div></div><div class="post-wrap" id="p2"><div class="datechip"><span class="dc-date">Launch week · Fri</span><span class="dc-kind">Carousel · 5 frames · Q3 post-mortem</span></div><div class="card"><div class="head"><div class="av av-aspen"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg></div><div class="who"><span class="nm">Aspen</span><span class="tg">Property Claims Services</span><span class="tm">Scheduled &middot; Launch week · Fri &#127760;</span></div><div class="fol">+ Follow</div></div><div class="cap clamp" id="cap-p2">The 90-day window on this year's CAT files is where the real story shows up.
+
+Most post-mortems close before they see it.
+
+<span class="tag">#ClaimsWithAspen</span> · <span class="tag">#ClaimsIntelligence</span> · <span class="tag">#CATResponse</span></div><span class="more" data-t="cap-p2">&hellip;see more</span><div class="media carousel" data-n="5"><div class="cfr on" data-i="0"><div class="hf cover"><div class="hf-top"><span class="wm"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg>Aspen</span><span class="hf-n">01</span></div><div class="hf-cover"><h3>The Q3 post-mortem question most carriers skip.</h3><span class="rule"></span><p>It's when the CAT reports get written, partner performance gets reviewed, and next year's planning starts to take shape.</p></div><div class="hf-foot">1 / 5</div></div></div><div class="cfr" data-i="1"><div class="hf"><div class="hf-top"><span class="wm"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg>Aspen</span><span class="hf-n">02</span></div><div class="hf-card"><div class="hf-lab">01</div><h3>The question</h3><span class="rule"></span><p>What percentage of files closed during this year's CAT events have already produced a supplement or reopen?</p><p>Most quarterly reporting doesn't tie supplement activity back to the specific event that produced the file.</p></div><div class="hf-foot">2 / 5</div></div></div><div class="cfr" data-i="2"><div class="hf"><div class="hf-top"><span class="wm"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg>Aspen</span><span class="hf-n">03</span></div><div class="hf-card"><div class="hf-lab">02</div><h3>The 90-day window</h3><span class="rule"></span><p>The 90-day window is where the story shows up.</p><p>Supplement volume on hurricane-season closures starts appearing exactly when the operational lesson is still fresh enough to act on.</p></div><div class="hf-foot">3 / 5</div></div></div><div class="cfr" data-i="3"><div class="hf"><div class="hf-top"><span class="wm"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg>Aspen</span><span class="hf-n">04</span></div><div class="hf-card"><div class="hf-lab">03</div><h3>Two reports</h3><span class="rule"></span><p>The data lives in two different reports.</p><p>Cycle time and closure metrics sit in the CAT deployment report. Supplement activity sits in general quarterly numbers.</p></div><div class="hf-foot">4 / 5</div></div></div><div class="cfr" data-i="4"><div class="hf cover"><div class="hf-top"><span class="wm"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg>Aspen</span><span class="hf-n">05</span></div><div class="hf-cover"><h3>Add event-linked supplement tracking to this quarter's review.</h3><span class="rule"></span><p>That's the piece worth including before next season's partner conversations begin.</p></div><div class="hf-foot">5 / 5</div></div></div><button class="cnav prev" aria-label="previous">&#10094;</button><button class="cnav next" aria-label="next">&#10095;</button><span class="ccount">1/5</span><div class="cdots"><span class="dot on" data-i="0"></span><span class="dot" data-i="1"></span><span class="dot" data-i="2"></span><span class="dot" data-i="3"></span><span class="dot" data-i="4"></span></div></div><div class="note">Copy laid on the house template grammar. Final frames follow from design.</div><div class="acts"><span class="act">&#128077; Like</span><span class="act">&#128172; Comment</span><span class="act">&#128257; Repost</span><span class="act">&#10148; Send</span></div></div></div><div class="post-wrap" id="p3"><div class="datechip"><span class="dc-date">Week 2 · Mon</span><span class="dc-kind">Carousel · Behind the File · house template (Template #2)</span></div><div class="card"><div class="head"><div class="av av-aspen"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg></div><div class="who"><span class="nm">Aspen</span><span class="tg">Property Claims Services</span><span class="tm">Scheduled &middot; Week 2 · Mon &#127760;</span></div><div class="fol">+ Follow</div></div><div class="cap clamp" id="cap-p3">Part 04 of Behind the File.
+
+The best files aren't the ones anyone remembers. They're the ones that closed cleanly and never came back. The quiet ones are the ones doing the work.
+
+<span class="tag">#ClaimsWithAspen</span> · <span class="tag">#BehindTheFile</span> · <span class="tag">#ClaimsOperations</span></div><span class="more" data-t="cap-p3">&hellip;see more</span><div class="media carousel" data-n="9"><img class="cfr on" data-i="0" src="assets/t2_1.jpg" alt="frame 1"/><img class="cfr" data-i="1" src="assets/t2_2.jpg" alt="frame 2"/><img class="cfr" data-i="2" src="assets/t2_3.jpg" alt="frame 3"/><img class="cfr" data-i="3" src="assets/t2_4.jpg" alt="frame 4"/><img class="cfr" data-i="4" src="assets/t2_5.jpg" alt="frame 5"/><img class="cfr" data-i="5" src="assets/t2_6.jpg" alt="frame 6"/><img class="cfr" data-i="6" src="assets/t2_7.jpg" alt="frame 7"/><img class="cfr" data-i="7" src="assets/t2_8.jpg" alt="frame 8"/><img class="cfr" data-i="8" src="assets/t2_9.jpg" alt="frame 9"/><button class="cnav prev" aria-label="previous">&#10094;</button><button class="cnav next" aria-label="next">&#10095;</button><span class="ccount">1/9</span><div class="cdots"><span class="dot on" data-i="0"></span><span class="dot" data-i="1"></span><span class="dot" data-i="2"></span><span class="dot" data-i="3"></span><span class="dot" data-i="4"></span><span class="dot" data-i="5"></span><span class="dot" data-i="6"></span><span class="dot" data-i="7"></span><span class="dot" data-i="8"></span></div></div><div class="note">House template, your pick from 24 Sep. Photograph is a stand-in until the licensed frame is placed.</div><div class="acts"><span class="act">&#128077; Like</span><span class="act">&#128172; Comment</span><span class="act">&#128257; Repost</span><span class="act">&#10148; Send</span></div></div></div><div class="post-wrap" id="p4"><div class="datechip"><span class="dc-date">Week 2 · Wed</span><span class="dc-kind">Quote card · Mark's profile, page reshares</span><span class="status">Your words to edit</span></div><div class="card"><div class="reshare-line">&#8635; Aspen will reshare this from Mark Vetrovec</div><div class="head"><img class="av" src="assets/mark_avatar.jpg" alt="Mark Vetrovec"/><div class="who"><span class="nm">Mark Vetrovec</span><span class="tg">CEO, Aspen</span><span class="tm">Scheduled &middot; Week 2 · Wed &#127760;</span></div><div class="fol">+ Follow</div></div><div class="cap clamp" id="cap-p4">Carriers ask me what makes Aspen different from other IA firms. The honest answer is a line I've come back to more than once this year.
+
+The field does the work on the ground. The desk owns the outcome.
+
+That's it. That's the whole model.
+
+Most IA firms treat the field as the end of the process. The adjuster inspects, submits, and the file goes wherever the carrier's workflow takes it. The vendor's job ends when the inspection ends.
+
+We treat the field as the beginning. The desk adjuster owns the file from assignment through submission — carrier communication, file development, quality review, delivery. When the file reaches your desk, it's ready.
+
+That structural choice is what carriers experience as the difference. Not marketing. Not technology. Not scale. Just a defined operational model that produces cleaner files, fewer returns, and less desk rework.
+
+Doesn't fit every carrier's operation. Worth being clear about it either way.
+
+<span class="tag">#ClaimsWithAspen</span> <span class="tag">#ClaimsLeadership</span></div><span class="more" data-t="cap-p4">&hellip;see more</span><div class="media"><div class="hf quote"><div class="hf-top"><span class="wm"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg>Aspen</span></div><div class="hf-cover"><div class="qmark">&ldquo;</div><h3>The field does the work on the ground. The desk owns the outcome.</h3><span class="rule"></span><p>Mark Vetrovec, CEO</p></div></div></div><div class="acts"><span class="act">&#128077; Like</span><span class="act">&#128172; Comment</span><span class="act">&#128257; Repost</span><span class="act">&#10148; Send</span></div></div></div><div class="post-wrap" id="p5"><div class="datechip"><span class="dc-date">Week 3 · Mon</span><span class="dc-kind">Long-form · Mark's profile, page reshares</span><span class="status">Your three bullets fill this</span></div><div class="card"><div class="reshare-line">&#8635; Aspen will reshare this from Mark Vetrovec</div><div class="head"><img class="av" src="assets/mark_avatar.jpg" alt="Mark Vetrovec"/><div class="who"><span class="nm">Mark Vetrovec</span><span class="tg">CEO, Aspen</span><span class="tm">Scheduled &middot; Week 3 · Mon &#127760;</span></div><div class="fol">+ Follow</div></div><div class="cap clamp" id="cap-p5">Three days in Las Vegas last week, mostly listening. A few things carriers said about claims are worth putting on record.
+
+[Article link]
+
+— Mark Vetrovec, CEO · Aspen</div><span class="more" data-t="cap-p5">&hellip;see more</span><div class="media"><div class="hf static"><div class="hf-top"><span class="wm"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg>Aspen</span><span class="hf-n">Article</span></div><div class="hf-cover"><h3>What I heard from carriers at ITC.</h3><span class="rule"></span><p>Mark Vetrovec</p></div></div></div><details class="art"><summary>Read the article shape</summary><pre>What carriers were talking about at ITC
+
+I spent three days at ITC Vegas last week, mostly listening. [One line on what you went to hear.]
+
+Three things came up more than anything else.
+
+1. [Theme one, in your words.]
+[What carriers actually said about it, one or two lines.]
+[Why it matters to how a file gets built.]
+
+2. [Theme two.]
+[What they said.]
+[Why it matters.]
+
+3. [Theme three.]
+[What they said.]
+[Why it matters.]
+
+What it changes about how we work: [your answer, or "nothing, and here is why".]
+
+The field does the work on the ground. The desk owns the outcome. [Or your own close.]
+
+— Mark Vetrovec, CEO · Aspen</pre></details><div class="acts"><span class="act">&#128077; Like</span><span class="act">&#128172; Comment</span><span class="act">&#128257; Repost</span><span class="act">&#10148; Send</span></div></div></div><div class="post-wrap" id="p6"><div class="datechip"><span class="dc-date">Week 3 · Wed</span><span class="dc-kind">Static · Brand</span></div><div class="card"><div class="head"><div class="av av-aspen"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg></div><div class="who"><span class="nm">Aspen</span><span class="tg">Property Claims Services</span><span class="tm">Scheduled &middot; Week 3 · Wed &#127760;</span></div><div class="fol">+ Follow</div></div><div class="cap clamp" id="cap-p6">Ask any experienced adjuster where a file's outcome gets decided and most will say the inspection. They're half right.
+
+The documentation captured at the property is what the rest of the file is built on. The photo report. The narrative. The scope. Every downstream decision rests on what got captured in the hour or two at the loss.
+
+But raw material isn't a file. The desk review is where the three documents get read against each other, where gaps get caught before the carrier desk catches them, and where a file becomes something that closes once and stays closed.
+
+Built at inspection. Finished at the desk. Strong operations are disciplined at both ends.
+
+Where does your partner's file quality actually get decided: at the property, or before it reaches your desk?
+
+<span class="tag">#PropertyClaims</span> <span class="tag">#InsuranceClaims</span> <span class="tag">#ClaimsOperations</span></div><span class="more" data-t="cap-p6">&hellip;see more</span><div class="media"><div class="hf static"><div class="hf-top"><span class="wm"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg>Aspen</span></div><div class="hf-cover"><h3>Files are built at inspection. They're finished at the desk.</h3><span class="rule"></span></div></div></div><div class="note">Card line on the house template grammar. Final creative follows from design.</div><div class="acts"><span class="act">&#128077; Like</span><span class="act">&#128172; Comment</span><span class="act">&#128257; Repost</span><span class="act">&#10148; Send</span></div></div></div><div class="post-wrap" id="p7"><div class="datechip"><span class="dc-date">Week 3 · Fri</span><span class="dc-kind">Insight post · Wind vs. Flood</span></div><div class="card"><div class="head"><div class="av av-aspen"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg></div><div class="who"><span class="nm">Aspen</span><span class="tg">Property Claims Services</span><span class="tm">Scheduled &middot; Week 3 · Fri &#127760;</span></div><div class="fol">+ Follow</div></div><div class="cap clamp" id="cap-p7">Wind or flood? On a hurricane file it is rarely one or the other, and the carrier's determination rests on what the adjuster documented at the property.
+
+Our Insight on how a file should be built when both perils are in play: what to capture, how the photo report, narrative and estimate have to agree, and where documentation anchors to carrier guidelines.
+
+Read it: <span class="tag">aspenclaims.com/blog/wind-vs-flood-hurricane-claim-documentation/</span>
+
+<span class="tag">#PropertyClaims</span> <span class="tag">#HurricaneClaims</span> <span class="tag">#InsuranceClaims</span></div><span class="more" data-t="cap-p7">&hellip;see more</span><div class="media"><div class="hf static"><div class="hf-top"><span class="wm"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg>Aspen</span><span class="hf-n">Insight</span></div><div class="hf-cover"><h3>Wind vs. Flood Documentation Standards for Insurance Carriers</h3><span class="rule"></span><p>aspenclaims.com · Insights</p></div></div></div><div class="acts"><span class="act">&#128077; Like</span><span class="act">&#128172; Comment</span><span class="act">&#128257; Repost</span><span class="act">&#10148; Send</span></div></div></div><div class="post-wrap" id="p8"><div class="datechip"><span class="dc-date">Week 4 · Mon</span><span class="dc-kind">Static · Brand</span></div><div class="card"><div class="head"><div class="av av-aspen"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg></div><div class="who"><span class="nm">Aspen</span><span class="tg">Property Claims Services</span><span class="tm">Scheduled &middot; Week 4 · Mon &#127760;</span></div><div class="fol">+ Follow</div></div><div class="cap clamp" id="cap-p8">Most carrier scorecards track cycle time, cost-per-file, and volume handled. Fewer track the metric that most closely correlates with downstream file quality.
+
+Revision request rate. How often a partner's submitted files come back for correction before the carrier desk can process them.
+
+A high revision rate signals that the partner's QA isn't catching what the carrier desk will catch. The gap between what gets submitted and what gets accepted is where desk rework hours accumulate - and where the real operational cost of the relationship hides.
+
+Partners with strong pre-delivery review usually have low revision rates. Partners without it usually don't.
+
+If your scorecard doesn't include revision request rate as a standing column, that's the piece worth adding before next year's evaluation cycle.
+
+<span class="tag">#ClaimsWithAspen</span> <span class="tag">#ClaimsIntelligence</span> <span class="tag">#VendorPerformance</span></div><span class="more" data-t="cap-p8">&hellip;see more</span><div class="media"><div class="hf static"><div class="hf-top"><span class="wm"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg>Aspen</span></div><div class="hf-cover"><h3>The partner scorecard column most carriers still don't include.</h3><span class="rule"></span></div></div></div><div class="note">Card line on the house template grammar. Final creative follows from design.</div><div class="acts"><span class="act">&#128077; Like</span><span class="act">&#128172; Comment</span><span class="act">&#128257; Repost</span><span class="act">&#10148; Send</span></div></div></div><div class="post-wrap" id="p9"><div class="datechip"><span class="dc-date">Week 4 · Wed</span><span class="dc-kind">Carousel · Behind the File · 6 frames</span></div><div class="card"><div class="head"><div class="av av-aspen"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg></div><div class="who"><span class="nm">Aspen</span><span class="tg">Property Claims Services</span><span class="tm">Scheduled &middot; Week 4 · Wed &#127760;</span></div><div class="fol">+ Follow</div></div><div class="cap clamp" id="cap-p9">Part 05 of Behind the File.
+
+Every claim has one conversation that decides how the rest of the file plays out. It usually happens in the first 24 hours. And it's rarely the conversation people expect.
+
+<span class="tag">#ClaimsWithAspen</span> · <span class="tag">#BehindTheFile</span> · <span class="tag">#ClaimsOperations</span></div><span class="more" data-t="cap-p9">&hellip;see more</span><div class="media carousel" data-n="6"><div class="cfr on" data-i="0"><div class="hf cover"><div class="hf-top"><span class="wm"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg>Aspen</span><span class="hf-n">01</span></div><div class="hf-cover"><div class="hf-lab">BEHIND THE FILE · PART 05</div><h3>The conversation that decides the file.</h3><span class="rule"></span></div><div class="hf-foot">1 / 6</div></div></div><div class="cfr" data-i="1"><div class="hf"><div class="hf-top"><span class="wm"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg>Aspen</span><span class="hf-n">02</span></div><div class="hf-card"><div class="hf-lab">01</div><h3>The moment</h3><span class="rule"></span><p>The first call to the policyholder.</p><p>Under 24 hours on average. Usually the first time the insured hears from anyone about their loss.</p></div><div class="hf-foot">2 / 6</div></div></div><div class="cfr" data-i="2"><div class="hf"><div class="hf-top"><span class="wm"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg>Aspen</span><span class="hf-n">03</span></div><div class="hf-card"><div class="hf-lab">02</div><h3>What most people think matters</h3><span class="rule"></span><p>The information.</p><p>When the inspection is. What to prepare. What the process looks like.</p><p>That part matters. It isn't what decides the file.</p></div><div class="hf-foot">3 / 6</div></div></div><div class="cfr" data-i="3"><div class="hf"><div class="hf-top"><span class="wm"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg>Aspen</span><span class="hf-n">04</span></div><div class="hf-card"><div class="hf-lab">03</div><h3>What actually decides it</h3><span class="rule"></span><p>The tone.</p><p>Whether the policyholder feels heard. Whether the adjuster sounds like a person, not a process.</p></div><div class="hf-foot">4 / 6</div></div></div><div class="cfr" data-i="4"><div class="hf"><div class="hf-top"><span class="wm"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg>Aspen</span><span class="hf-n">05</span></div><div class="hf-card"><div class="hf-lab">04</div><h3>Why the tone decides the file</h3><span class="rule"></span><p>Trust set early prevents disputes later.</p><p>A policyholder who trusts the adjuster calls with questions, not complaints.</p></div><div class="hf-foot">5 / 6</div></div></div><div class="cfr" data-i="5"><div class="hf cover"><div class="hf-top"><span class="wm"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg>Aspen</span><span class="hf-n">06</span></div><div class="hf-cover"><h3>The first conversation is the whole file in miniature.</h3><span class="rule"></span><p>Handled well, everything downstream is easier.</p><p>Follow Aspen for the rest of the Behind the File series.</p></div><div class="hf-foot">6 / 6</div></div></div><button class="cnav prev" aria-label="previous">&#10094;</button><button class="cnav next" aria-label="next">&#10095;</button><span class="ccount">1/6</span><div class="cdots"><span class="dot on" data-i="0"></span><span class="dot" data-i="1"></span><span class="dot" data-i="2"></span><span class="dot" data-i="3"></span><span class="dot" data-i="4"></span><span class="dot" data-i="5"></span></div></div><div class="note">Copy laid on the house template grammar. Final frames follow from design.</div><div class="acts"><span class="act">&#128077; Like</span><span class="act">&#128172; Comment</span><span class="act">&#128257; Repost</span><span class="act">&#10148; Send</span></div></div></div><div class="post-wrap" id="p10"><div class="datechip"><span class="dc-date">Week 4 · Fri</span><span class="dc-kind">Voiceover · Mark's profile, page reshares · script approved Aug</span></div><div class="card"><div class="reshare-line">&#8635; Aspen will reshare this from Mark Vetrovec</div><div class="head"><img class="av" src="assets/mark_avatar.jpg" alt="Mark Vetrovec"/><div class="who"><span class="nm">Mark Vetrovec</span><span class="tg">CEO, Aspen</span><span class="tm">Scheduled &middot; Week 4 · Fri &#127760;</span></div><div class="fol">+ Follow</div></div><div class="cap clamp" id="cap-p10">Why isn't Aspen the cheapest option in the IA market? It's a fair question, and Mark answers it head-on.
+
+The cheapest partner isn't actually cheap — it just moves the cost to a different line of your P&amp;L.
+
+When you price a claims partner, are you pricing the file, or the full cost of it a year later?
+
+🎧 Sound on.
+
+<span class="tag">#ClaimsManagement</span> <span class="tag">#InsuranceClaims</span> <span class="tag">#ClaimsOperations</span></div><span class="more" data-t="cap-p10">&hellip;see more</span><div class="media"><div class="hf vo"><div class="hf-top"><span class="wm"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg>Aspen</span><span class="hf-n">&#127911; 75 s</span></div><div class="vo-wrap"><img class="vo-av" src="assets/mark_avatar.jpg" alt=""/><div class="wave"><i style="height:30%"></i><i style="height:55%"></i><i style="height:80%"></i><i style="height:45%"></i><i style="height:95%"></i><i style="height:60%"></i><i style="height:35%"></i><i style="height:70%"></i><i style="height:50%"></i><i style="height:85%"></i><i style="height:40%"></i><i style="height:65%"></i><i style="height:90%"></i><i style="height:45%"></i><i style="height:30%"></i><i style="height:75%"></i><i style="height:55%"></i><i style="height:40%"></i><i style="height:85%"></i><i style="height:60%"></i><i style="height:35%"></i><i style="height:70%"></i><i style="height:95%"></i><i style="height:50%"></i><i style="height:30%"></i><i style="height:60%"></i><i style="height:80%"></i><i style="height:45%"></i></div><div class="vo-nm">Mark Vetrovec</div><div class="vo-tg">CEO, Aspen</div></div></div></div><details class="art"><summary>Read the script</summary><pre>“The cheapest partner in the market is cheap because something in the operation isn't there. Usually QA. Sometimes training. Sometimes communication discipline. Sometimes all three.
+
+I get asked why Aspen isn't the lowest-priced option in the IA market. That's the answer — and here's the rest of it.
+
+The cost of those gaps doesn't disappear. It moves. It shows up later as supplements, reopens, complaint files, regulatory inquiries, and renewal losses that never trace cleanly back to the original decision.
+
+We built the operation to produce files that close once and stay closed. That costs a little more on the front end. It costs less in total.
+
+The carriers who run that math over a full year almost always land in the same place: the cheapest option isn't actually cheap. It just charges for the work it isn't doing in a different line of your P&amp;L.
+
+So when you price a claims partner, are you pricing the file — or the full cost of that file a year later?”</pre></details><div class="note">Script you approved in August. Produced as an AI voiceover with burned-in captions.</div><div class="acts"><span class="act">&#128077; Like</span><span class="act">&#128172; Comment</span><span class="act">&#128257; Repost</span><span class="act">&#10148; Send</span></div></div></div><div class="post-wrap" id="p11"><div class="datechip"><span class="dc-date">Week 4 · Sat</span><span class="dc-kind">Static · Halloween</span></div><div class="card"><div class="head"><div class="av av-aspen"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg></div><div class="who"><span class="nm">Aspen</span><span class="tg">Property Claims Services</span><span class="tm">Scheduled &middot; Week 4 · Sat &#127760;</span></div><div class="fol">+ Follow</div></div><div class="cap clamp" id="cap-p11">The scariest thing in claims isn't a haunted property.
+
+It's a file that closed six months ago and just came back for its third supplement.
+
+Happy Halloween from the Aspen team. 👻
+
+<span class="tag">#ClaimsWithAspen</span></div><span class="more" data-t="cap-p11">&hellip;see more</span><div class="media"><div class="hf static"><div class="hf-top"><span class="wm"><svg viewBox="214 363 317 317" aria-hidden="true"><path fill="#5E9827" d="M372.41,363.2c-87.45,0-158.34,70.89-158.34,158.34,0,38.74,13.92,74.22,37.02,101.74l173.36-201.9,27.26,9.19-182.92,210.7c7.63,6.61,15.89,12.49,24.68,17.56l148.97-173.49,27.26,9.19-152.36,175.51c9.77,3.62,19.98,6.31,30.55,7.95l113.11-131.73,27.26,9.19-107.85,124.24c83.73-4.16,150.34-73.37,150.34-158.14s-70.89-158.34-158.34-158.34Z"/></svg>Aspen</span></div><div class="hf-cover"><h3>Haunted properties don't haunt us.</h3><span class="rule"></span></div></div></div><div class="note">Card line on the house template grammar. Final creative follows from design.</div><div class="acts"><span class="act">&#128077; Like</span><span class="act">&#128172; Comment</span><span class="act">&#128257; Repost</span><span class="act">&#10148; Send</span></div></div></div>
+</div>
+
+<div class="footer">Aspen &middot; LinkedIn, launch month 2026 &middot; Prepared by Damco Digital<br/>The website walkthrough carousel joins the feed once it is built; one regulatory piece is held back for verification and is not in this month.</div>
+
+<script>
+document.querySelectorAll(".more").forEach(function(m){
+  var c=document.getElementById(m.dataset.t);
+  if(c.scrollHeight<=c.clientHeight+4){m.style.display="none";}
+  m.addEventListener("click",function(){
+    var open=c.classList.toggle("clamp")===false;
+    m.textContent=open?"see less":"…see more";
+  });
+});
+document.querySelectorAll(".carousel").forEach(function(car){
+  var n=+car.dataset.n,i=0;
+  function go(k){
+    i=(k+n)%n;
+    car.querySelectorAll(".cfr").forEach(function(f){f.classList.toggle("on",+f.dataset.i===i)});
+    car.querySelectorAll(".dot").forEach(function(d){d.classList.toggle("on",+d.dataset.i===i)});
+    car.querySelector(".ccount").textContent=(i+1)+"/"+n;
+  }
+  car.querySelector(".prev").addEventListener("click",function(){go(i-1)});
+  car.querySelector(".next").addEventListener("click",function(){go(i+1)});
+  car.querySelectorAll(".dot").forEach(function(d){d.addEventListener("click",function(){go(+d.dataset.i)})});
+});
+</script>
